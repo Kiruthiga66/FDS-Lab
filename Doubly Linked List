@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int data;
+    struct Node *prev, *next;
+} Node;
+
+void insertEnd(Node **head, int value) {
+    Node *node = malloc(sizeof(Node));
+    node->data = value;
+    node->next = NULL;
+
+    if (*head == NULL) {
+        node->prev = NULL;
+        *head = node;
+        return;
+    }
+
+    Node *current = *head;
+    while (current->next != NULL)
+        current = current->next;
+
+    current->next = node;
+    node->prev = current;
+}
+
+void display(Node *head) {
+    printf("Forward: ");
+    Node *current = head;
+    while (current != NULL) {
+        printf("%d ", current->data);
+        if (current->next == NULL)
+            break;
+        current = current->next;
+    }
+
+    printf("\nBackward: ");
+    while (current != NULL) {
+        printf("%d ", current->data);
+        current = current->prev;
+    }
+    printf("\n");
+}
+
+int main(void) {
+    Node *head = NULL;
+    int n, value;
+
+    printf("Number of values: ");
+    scanf("%d", &n);
+
+    for (int i = 0; i < n; i++) {
+        printf("Value: ");
+        scanf("%d", &value);
+        insertEnd(&head, value);
+    }
+
+    display(head);
+    return 0;
+}
