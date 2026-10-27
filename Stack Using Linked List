@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int data;
+    struct Node *next;
+} Node;
+
+int main(void) {
+    Node *top = NULL;
+    int choice, value;
+
+    do {
+        printf("\n1.Push 2.Pop 3.Display 0.Exit\nChoice: ");
+        scanf("%d", &choice);
+
+        if (choice == 1) {
+            Node *node = malloc(sizeof(Node));
+            if (node == NULL) {
+                printf("Memory allocation failed\n");
+                continue;
+            }
+            printf("Value: ");
+            scanf("%d", &value);
+            node->data = value;
+            node->next = top;
+            top = node;
+        } else if (choice == 2) {
+            if (top == NULL) {
+                printf("Stack is empty\n");
+            } else {
+                Node *temp = top;
+                printf("Popped: %d\n", temp->data);
+                top = top->next;
+                free(temp);
+            }
+        } else if (choice == 3) {
+            for (Node *current = top; current != NULL; current = current->next)
+                printf("%d ", current->data);
+            printf("\n");
+        }
+    } while (choice != 0);
+
+    return 0;
+}
