@@ -1,0 +1,38 @@
+#include <stdio.h>
+#define MAX 100
+
+int main(void) {
+    int queue[MAX], front = 0, rear = -1, count = 0;
+    int choice, value;
+
+    do {
+        printf("\n1.Enqueue 2.Dequeue 3.Display 0.Exit\nChoice: ");
+        scanf("%d", &choice);
+
+        if (choice == 1) {
+            if (count == MAX) {
+                printf("Queue is full\n");
+            } else {
+                printf("Value: ");
+                scanf("%d", &value);
+                rear = (rear + 1) % MAX;
+                queue[rear] = value;
+                count++;
+            }
+        } else if (choice == 2) {
+            if (count == 0) {
+                printf("Queue is empty\n");
+            } else {
+                printf("Removed: %d\n", queue[front]);
+                front = (front + 1) % MAX;
+                count--;
+            }
+        } else if (choice == 3) {
+            for (int i = 0; i < count; i++)
+                printf("%d ", queue[(front + i) % MAX]);
+            printf("\n");
+        }
+    } while (choice != 0);
+
+    return 0;
+}
