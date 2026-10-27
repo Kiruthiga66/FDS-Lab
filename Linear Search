@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int main(void) {
+    int a[100], n, target, found = -1;
+
+    printf("Number of elements: ");
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++)
+        scanf("%d", &a[i]);
+
+    printf("Value to search: ");
+    scanf("%d", &target);
+
+    for (int i = 0; i < n; i++) {
+        if (a[i] == target) {
+            found = i;
+            break;
+        }
+    }
+
+    if (found == -1)
+        printf("Not found\n");
+    else
+        printf("Found at position %d\n", found + 1);
+
+    return 0;
+}
